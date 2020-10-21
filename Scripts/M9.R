@@ -14,11 +14,11 @@ summary(grp4[, c("a_meat", "a_fish",
                  "a_eggs", "a_dairy")])
 
 
-## Cluster analysis on 4 variables
+## Cluster analysis on 4 var
 set.seed(20190926)
 grp4.cluster4 <- kmeans(grp4[, c("a_meat", "a_fish", 
                                  "a_eggs", "a_dairy")],
-                        4,
+                        4,iables
                         nstart = 100)
 
 grp4.cluster4[["size"]]
