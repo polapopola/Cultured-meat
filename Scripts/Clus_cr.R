@@ -489,3 +489,161 @@ with(group2, table(Disgusting, cluster1))
 with(group2, table(Disgusting, cluster2))
 with(group2, table(Disgusting, cluster3))
 with(group1, table(Disgusting, cluster4))
+
+## Agree/Disagree cluster 2
+
+cluster2.adj <- glm(cluster2 ~ Healthy+EF+Tasty+Kind+Unnatural+Disgusting, data = group2,
+                    family = binomial)
+coef(summary(cluster2.adj)) 
+exp(coef(summary(cluster2.adj)))                          
+exp(confint(cluster2.adj))
+summary(cluster2.adj)
+
+## Agree/Disagree cluster 3
+
+cluster3.adj <- glm(cluster3 ~ Healthy+EF+Tasty+Kind+Unnatural+Disgusting, data = group2,
+                    family = binomial)
+coef(summary(cluster3.adj)) 
+exp(coef(summary(cluster3.adj)))                          
+exp(confint(cluster3.adj))
+summary(cluster3.adj)
+
+## Trying cluster 1
+group2[["Trying"]]<-as.factor(group2[["Trying"]])
+group1[["Trying"]]<-as.factor(group1[["Trying"]])
+
+cluster1.try <- glm(cluster1 ~ Trying, data = group2,
+                    family = binomial)
+coef(summary(cluster1.try)) 
+exp(coef(summary(cluster1.try)))                          
+exp(confint(cluster1.try))
+summary(cluster1.try)
+with(group2, table(Trying, cluster1))
+
+## Trying cluster 2
+
+cluster2.try <- glm(cluster2 ~ Trying, data = group2,
+                    family = binomial)
+coef(summary(cluster2.try)) 
+exp(coef(summary(cluster2.try)))                          
+exp(confint(cluster2.try))
+summary(cluster2.try)
+with(group2, table(Trying, cluster2))
+
+## Trying cluster 3
+
+cluster3.try <- glm(cluster3 ~ Trying, data = group2,
+                    family = binomial)
+coef(summary(cluster3.try)) 
+exp(coef(summary(cluster3.try)))                          
+exp(confint(cluster3.try))
+summary(cluster3.try)
+with(group2, table(Trying, cluster3))
+
+## Trying cluster 4
+
+cluster4.try <- glm(cluster4 ~ Trying, data = group1,
+                    family = binomial)
+coef(summary(cluster4.try)) 
+exp(coef(summary(cluster4.try)))                          
+exp(confint(cluster4.try))
+summary(cluster4.try)
+with(group1, table(Trying, cluster4))
+
+## Same prize cluster 1
+
+group2[["Same price"]]<-as.factor(group2[["Same price"]])
+group1[["Same price"]]<-as.factor(group1[["Same price"]])
+
+cluster1.sp <- glm(cluster1 ~ "Same price", data = group2,
+                    family = binomial)
+coef(summary(cluster1.sp)) 
+exp(coef(summary(cluster1.sp)))                          
+exp(confint(cluster1.sp))
+summary(cluster1.sp)
+with(group2, table(Same price, cluster1))
+
+## Higher price cluster 1
+
+group2[["Expensive"]]<-as.factor(group2[["Expensive"]])
+group1[["Expensive"]]<-as.factor(group1[["Expensive"]])
+
+cluster1.ex <- glm(cluster1 ~ Expensive, data = group2,
+                   family = binomial)
+coef(summary(cluster1.ex)) 
+exp(coef(summary(cluster1.ex)))                          
+exp(confint(cluster1.ex))
+summary(cluster1.ex)
+with(group2, table(Expensive, cluster1))
+
+## Higher price cluster 2
+
+cluster2.ex <- glm(cluster2 ~ Expensive, data = group2,
+                   family = binomial)
+coef(summary(cluster2.ex)) 
+exp(coef(summary(cluster2.ex)))                          
+exp(confint(cluster2.ex))
+summary(cluster2.ex)
+with(group2, table(Expensive, cluster2))
+
+## Higher price cluster 3
+
+cluster3.ex <- glm(cluster3 ~ Expensive, data = group2,
+                   family = binomial)
+coef(summary(cluster3.ex)) 
+exp(coef(summary(cluster3.ex)))                          
+exp(confint(cluster3.ex))
+summary(cluster3.ex)
+with(group2, table(Expensive, cluster3))
+
+## Higher price cluster 4
+
+cluster4.ex <- glm(cluster4 ~ Expensive, data = group1,
+                   family = binomial)
+coef(summary(cluster4.ex)) 
+exp(coef(summary(cluster4.ex)))                          
+exp(confint(cluster4.ex))
+summary(cluster4.ex)
+with(group1, table(Expensive, cluster4))
+
+## Cheap cluster 1
+group2[["Cheap"]]<-as.factor(group2[["Cheap"]])
+group1[["Cheap"]]<-as.factor(group1[["Cheap"]])
+
+cluster1.ch <- glm(cluster1 ~ Cheap, data = group2,
+                   family = binomial)
+coef(summary(cluster1.ch)) 
+exp(coef(summary(cluster1.ch)))                          
+exp(confint(cluster1.ch))
+summary(cluster1.ch)
+with(group2, table(Cheap, cluster1))
+
+## Cheap cluster 2
+
+cluster2.ch <- glm(cluster2 ~ Cheap, data = group2,
+                   family = binomial)
+coef(summary(cluster2.ch)) 
+exp(coef(summary(cluster2.ch)))                          
+exp(confint(cluster2.ch))
+summary(cluster2.ch)
+with(group2, table(Cheap, cluster2))
+
+## Cheap cluster 3
+
+cluster3.ch <- glm(cluster3 ~ Cheap, data = group2,
+                   family = binomial)
+coef(summary(cluster3.ch)) 
+exp(coef(summary(cluster3.ch)))                          
+exp(confint(cluster3.ch))
+summary(cluster3.ch)
+with(group2, table(Cheap, cluster3))
+
+## Cheap cluster 4
+
+cluster4.ch <- glm(cluster4 ~ Cheap, data = group1,
+                   family = binomial)
+coef(summary(cluster4.ch)) 
+exp(coef(summary(cluster4.ch)))                          
+exp(confint(cluster4.ch))
+summary(cluster4.ch)
+with(group1, table(Cheap, cluster4))
