@@ -1,5 +1,5 @@
 ##getting rid of the NAs
-new<-na.omit(DatasetCM_Copy)
+new<-na.omit(DatasetCM_Age_cleaned)
 ## Dividing the data into two groups, group1 is non-meat eaters
 group1<- new[1:72, ]
 group1[["cluster1"]] <- NA  # added by Christian Ritz, Oct. 22 2020
@@ -77,7 +77,7 @@ summary(logreg.2.gender)
 exp(coef(summary(logreg.2.gender))[2, 1]) 
 exp(confint(logreg.2.gender)[2, ])
 with(group2, table(Sex, cluster2))
-with(group2(table(Sex, cluster2), margin=1)*100)
+with(group2, (table(Sex, cluster2), margin=1)*100)
 
 ## Gender for cluster 3 - High 
 
@@ -90,14 +90,26 @@ exp(confint(logreg.3.gender)[2, ])
 with(group2, table(Sex, cluster3))
 with(group2(table(Sex, cluster3), margin=1)*100)
 
+## Gender for cluster4
+group1[["Sex"]]<-as.factor(group1[["Sex"]])
+logreg.4.gender<-glm(cluster4 ~ Sex, data=group1,
+                     family=binomial)
+exp(coef(summary(logreg.4.gender)))
+summary(logreg.4.gender)
+exp(coef(summary(logreg.4.gender))[2, 1]) 
+exp(confint(logreg.4.gender))
+with(group1, table(Sex, cluster4))
+with(group1(table(Sex, cluster4), margin=1)*100)
+
 ## Countries cluster 1
+group2[["Country"]]<-as.factor(group2[["Country"]])
 
 logreg.1.Country<-glm(cluster1 ~ Country, data=group2,
                      family=binomial)
 exp(coef(summary(logreg.1.Country)))
 summary(logreg.1.Country)
 exp(coef(summary(logreg.1.Country))[2, 1]) 
-exp(confint(logreg.1.Country)[2, ])
+exp(confint(logreg.1.Country))
 with(group2, table(Country, cluster1))
 with(group2(table(Country, cluster1), margin=1)*100)
 
@@ -107,8 +119,8 @@ logreg.2.Country<-glm(cluster2 ~ Country, data=group2,
                       family=binomial)
 exp(coef(summary(logreg.2.Country)))
 summary(logreg.2.Country)
-exp(coef(summary(logreg.2.Country))[2, 1]) 
-exp(confint(logreg.2.Country)[2, ])
+exp(coef(summary(logreg.2.Country)))
+exp(confint(logreg.2.Country))
 with(group2, table(Country, cluster2))
 with(group2(table(Country, cluster2), margin=1)*100)
 
@@ -119,11 +131,24 @@ logreg.3.Country<-glm(cluster3 ~ Country, data=group2,
 exp(coef(summary(logreg.3.Country)))
 summary(logreg.3.Country)
 exp(coef(summary(logreg.3.Country))[2, 1]) 
-exp(confint(logreg.3.Country)[2, ])
+exp(confint(logreg.3.Country)
 with(group2, table(Country, cluster3))
 with(group2(table(Country, cluster3), margin=1)*100)
 
+## Countries cluster 4
+
+logreg.4.Country<-glm(cluster4 ~ Country, data=group1,
+                      family=binomial)
+exp(coef(summary(logreg.4.Country)))
+summary(logreg.4.Country)
+exp(coef(summary(logreg.4.Country))[2, 1]) 
+exp(confint(logreg.4.Country)
+with(group1, table(Country, cluster4))
+    with(group1(table(Country, cluster4), margin=1)*100)
+
 ## Cluster 1 Localty
+group2[["Residence"]]<-as.factor(group2[["Residence"]])
+group1[["Residence"]]<-as.factor(group1[["Residence"]])
 
 logreg.1.loc<-glm(cluster1 ~ Residence, data=group2,
                       family=binomial)
@@ -156,14 +181,26 @@ exp(confint(logreg.3.loc)[2, ])
 with(group2, table(Residence, cluster3))
 with(group2(table(Residence, cluster3), margin=1)*100)
 
-## Cluster 1 education 
+## Cluster 4 Local
 
+logreg.4.loc<-glm(cluster4 ~ Residence, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.loc)))
+summary(logreg.4.loc)
+exp(coef(summary(logreg.4.loc))[2, 1]) 
+exp(confint(logreg.4.loc)[2, ])
+with(group1, table(Residence, cluster4))
+with(group1(table(Residence, cluster4), margin=1)*100)
+
+## Cluster 1 education 
+group2[["Education"]]<-as.factor(group2[["Education"]])
+group1[["Education"]]<-as.factor(group1[["Education"]])
 logreg.1.edu<-glm(cluster1 ~ Education, data=group2,
                   family=binomial)
 exp(coef(summary(logreg.1.edu)))
 summary(logreg.1.edu)
-exp(coef(summary(logreg.1.edu))[2, 1]) 
-exp(confint(logreg.1.edu)[2, ])
+exp(coef(summary(logreg.1.edu))
+exp(confint(logreg.1.edu))
 with(group2, table(Education, cluster1))
 with(group2(table(Education, cluster1), margin=1)*100)
 
@@ -173,8 +210,8 @@ logreg.2.edu<-glm(cluster2 ~ Education, data=group2,
                   family=binomial)
 exp(coef(summary(logreg.2.edu)))
 summary(logreg.2.edu)
-exp(coef(summary(logreg.2.edu))[2, 1]) 
-exp(confint(logreg.2.edu)[2, ])
+exp(coef(summary(logreg.2.edu))
+exp(confint(logreg.2.edu)
 with(group2, table(Education, cluster2))
 with(group2(table(Education, cluster2), margin=1)*100)
 
@@ -184,8 +221,8 @@ logreg.3.edu<-glm(cluster3 ~ Education, data=group2,
                   family=binomial)
 exp(coef(summary(logreg.3.edu)))
 summary(logreg.3.edu)
-exp(coef(summary(logreg.3.edu))[2, 1]) 
-exp(confint(logreg.3.edu)[2, ])
+exp(coef(summary(logreg.3.edu)))
+exp(confint(logreg.3.edu))
 with(group2, table(Education, cluster3))
 with(group2(table(Education, cluster3), margin=1)*100)
 
@@ -200,8 +237,34 @@ exp(confint(logreg.1.age)[2, ])
 with(group2, table(Age, cluster1))
 with(group2(table(Age, cluster1), margin=1)*100)
 
+## CLuster 2 AGe
+
+logreg.2.age<-glm(cluster2 ~ Age, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.2.age)))
+summary(logreg.2.age)
+exp(coef(summary(logreg.2.age))[2, 1]) 
+exp(confint(logreg.2.age)[2, ])
+with(group2, table(Age, cluster2))
+with(group2(table(Age, cluster2), margin=1)*100)
+
+##CLuster 3 Age
+
+logreg.3.age<-glm(cluster3 ~ Age, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.3.age)))
+summary(logreg.3.age)
+exp(coef(summary(logreg.3.age))[2, 1]) 
+exp(confint(logreg.3.age)[2, ])
+with(group2, table(Age, cluster3))
+with(group2(table(Age, cluster3), margin=1)*100)
 
 ## MC cluster 1
+
+group2[["MC1"]]<-as.factor(group2[["MC1"]])
+group2[["MC2"]]<-as.factor(group2[["MC2"]])
+group2[["MC3"]]<-as.factor(group2[["MC3"]])
+
 
 logreg.1.MC<-glm(cluster1 ~ MC1, data=group2,
                   family=binomial)
@@ -234,7 +297,18 @@ exp(confint(logreg.3.MC1)[2, ])
 with(group2, table(MC1, cluster3))
 with(group2(table(MC1, cluster3), margin=1)*100)
 
-## M2 cluster 1
+## MC1 cluster 4
+
+logreg.4.MC1<-glm(cluster4 ~ MC1, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.MC1)))
+summary(logreg.4.MC1)
+exp(coef(summary(logreg.4.MC1))[2, 1])
+exp(confint(logreg.4.MC1)[2, ])
+with(group1, table(MC1, cluster4))
+with(group1(table(MC1, cluster4), margin=1)*100)
+
+## MC2 cluster 1
 
 logreg.1.MC2<-glm(cluster1 ~ MC2, data=group2,
                  family=binomial)
@@ -267,4 +341,118 @@ exp(confint(logreg.3.MC2)[2, ])
 with(group2, table(MC2, cluster3))
 with(group2(table(MC2, cluster3), margin=1)*100)
 
+## MC2 cluster 4
 
+logreg.4.MC2<-glm(cluster4~ MC2, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.MC2)))
+summary(logreg.4.MC2)
+exp(coef(summary(logreg.4.MC2))[2, 1])
+exp(confint(logreg.4.MC2)[2, ])
+with(group1, table(MC2, cluster4))
+
+## MC3 cluster 1
+
+logreg.1.MC3<-glm(cluster1~ MC3, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.1.MC3)))
+summary(logreg.1.MC3)
+exp(coef(summary(logreg.1.MC3))[2, 1])
+exp(confint(logreg.1.MC3)[2, ])
+with(group2, table(MC3, cluster1))
+
+## MC3 cluster2
+
+logreg.2.MC3<-glm(cluster2~ MC3, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.2.MC3)))
+summary(logreg.2.MC3)
+exp(coef(summary(logreg.2.MC3))[2, 1])
+exp(confint(logreg.2.MC3)[2, ])
+with(group2, table(MC3, cluster2))
+
+## MC3 cluster3
+
+logreg.3.MC3<-glm(cluster3~ MC3, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.3.MC3)))
+summary(logreg.3.MC3)
+exp(coef(summary(logreg.3.MC3))[2, 1])
+exp(confint(logreg.3.MC3)[2, ])
+with(group2, table(MC3, cluster3))
+
+## MC3 cluster 4
+
+logreg.4.MC3<-glm(cluster4~ MC3, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.MC3)))
+summary(logreg.4.MC3)
+exp(coef(summary(logreg.4.MC3))[2, 1])
+exp(confint(logreg.4.MC3)[2, ])
+with(group1, table(MC3, cluster4))
+
+## Familiartiy cluster1
+group2[["Familiarity"]]<-as.factor(group2[["Familiarity"]])
+group1[["Familiarity"]]<-as.factor(group1[["Familiarity"]])
+
+logreg.1.Fami<-glm(cluster1~ Familiarity, data=group2,
+                  family=binomial)
+exp(coef(summary(logreg.1.Fami)))
+summary(logreg.1.Fami)
+exp(coef(summary(logreg.1.Fami)))
+exp(confint(logreg.1.Fami))
+with(group2, table(Familiarity, cluster1))
+
+## Familiarity cluster 2
+
+logreg.2.Fami<-glm(cluster2~ Familiarity, data=group2,
+                   family=binomial)
+exp(coef(summary(logreg.2.Fami)))
+summary(logreg.2.Fami)
+exp(confint(logreg.2.Fami))
+with(group2, table(Familiarity, cluster2))
+
+## Familiartiy cluster 3
+
+logreg.3.Fami<-glm(cluster3~ Familiarity, data=group2,
+                   family=binomial)
+exp(coef(summary(logreg.3.Fami)))
+summary(logreg.3.Fami)
+exp(confint(logreg.3.Fami))
+with(group2, table(Familiarity, cluster3))
+
+## Familiarity cluster 4
+
+logreg.4.Fami<-glm(cluster4~ Familiarity, data=group1,
+                   family=binomial)
+exp(coef(summary(logreg.4.Fami)))
+summary(logreg.4.Fami)
+exp(confint(logreg.4.Fami))
+with(group1, table(Familiarity, cluster4))
+
+## Adjusted (univariate) logistic regression
+cluster1.adj <- glm(cluster1 ~ Age+Education+Sex, data = group2,
+                         family = binomial)
+coef(summary(cluster1.adj)) 
+exp(coef(summary(cluster1.adj))[2, 1])                           
+exp(confint(cluster1.adj)[2, ])
+summary(cluster1.adj)
+
+## Agre dis cluster 1
+
+group2[["Healhty"]]<-as.factor(group2[["Healthy"]])
+group1[["Healthy"]]<-as.factor(group1[["Healthy"]])
+group2[["EF"]]<-as.factor(group2[["EF"]])
+group1[["EF"]]<-as.factor(group1[["EF"]])
+group2[["Tasty"]]<-as.factor(group2[["Tasty"]])
+group1[["Tasty"]]<-as.factor(group1[["Tasty"]])
+group2[["Kind"]]<-as.factor(group2[["Kind"]])
+group1[["Kind"]]<-as.factor(group1[["Kind"]])
+
+
+cluster1.adj <- glm(cluster1 ~ Healthy+EF+Tasty+Kind+Unnatural+Disgusting, data = group2,
+                    family = binomial)
+coef(summary(cluster1.adj)) 
+exp(coef(summary(cluster1.adj))[2, 1])                           
+exp(confint(cluster1.adj)[2, ])
+summary(cluster1.adj)
