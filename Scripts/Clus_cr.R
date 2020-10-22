@@ -448,11 +448,44 @@ group2[["Tasty"]]<-as.factor(group2[["Tasty"]])
 group1[["Tasty"]]<-as.factor(group1[["Tasty"]])
 group2[["Kind"]]<-as.factor(group2[["Kind"]])
 group1[["Kind"]]<-as.factor(group1[["Kind"]])
-
+group2[["Unnatural"]]<-as.factor(group2[["Unnatural"]])
+group1[["Unnatural"]]<-as.factor(group1[["Unnatural"]])
+group2[["Disgusting"]]<-as.factor(group2[["Disgusting"]])
+group1[["Disgusting"]]<-as.factor(group1[["Disgusting"]])
 
 cluster1.adj <- glm(cluster1 ~ Healthy+EF+Tasty+Kind+Unnatural+Disgusting, data = group2,
                     family = binomial)
 coef(summary(cluster1.adj)) 
-exp(coef(summary(cluster1.adj))[2, 1])                           
-exp(confint(cluster1.adj)[2, ])
+exp(coef(summary(cluster1.adj)))                          
+exp(confint(cluster1.adj))
 summary(cluster1.adj)
+
+with(group2, table(Healthy, cluster1))
+with(group2, table(Healthy, cluster2))
+with(group2, table(Healthy, cluster3))
+with(group1, table(Healthy, cluster4))
+
+with(group2, table(EF, cluster1))
+with(group2, table(EF, cluster2))
+with(group2, table(EF, cluster3))
+with(group1, table(EF, cluster4))
+
+with(group2, table(Tasty, cluster1))
+with(group2, table(Tasty, cluster2))
+with(group2, table(Tasty, cluster3))
+with(group1, table(Tasty, cluster4))
+
+with(group2, table(Kind, cluster1))
+with(group2, table(Kind, cluster2))
+with(group2, table(Kind, cluster3))
+with(group1, table(Kind, cluster4))
+
+with(group2, table(Unnatural, cluster1))
+with(group2, table(Unnatural, cluster2))
+with(group2, table(Unnatural, cluster3))
+with(group1, table(Unnatural, cluster4))
+
+with(group2, table(Disgusting, cluster1))
+with(group2, table(Disgusting, cluster2))
+with(group2, table(Disgusting, cluster3))
+with(group1, table(Disgusting, cluster4))
