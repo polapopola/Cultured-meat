@@ -77,7 +77,6 @@ summary(logreg.2.gender)
 exp(coef(summary(logreg.2.gender))[2, 1]) 
 exp(confint(logreg.2.gender)[2, ])
 with(group2, table(Sex, cluster2))
-with(group2, (table(Sex, cluster2), margin=1)*100)
 
 ## Gender for cluster 3 - High 
 
@@ -131,7 +130,7 @@ logreg.3.Country<-glm(cluster3 ~ Country, data=group2,
 exp(coef(summary(logreg.3.Country)))
 summary(logreg.3.Country)
 exp(coef(summary(logreg.3.Country))[2, 1]) 
-exp(confint(logreg.3.Country)
+exp(confint(logreg.3.Country))
 with(group2, table(Country, cluster3))
 with(group2(table(Country, cluster3), margin=1)*100)
 
@@ -210,8 +209,8 @@ logreg.2.edu<-glm(cluster2 ~ Education, data=group2,
                   family=binomial)
 exp(coef(summary(logreg.2.edu)))
 summary(logreg.2.edu)
-exp(coef(summary(logreg.2.edu))
-exp(confint(logreg.2.edu)
+exp(coef(summary(logreg.2.edu)))
+exp(confint(logreg.2.edu))
 with(group2, table(Education, cluster2))
 with(group2(table(Education, cluster2), margin=1)*100)
 
@@ -226,6 +225,18 @@ exp(confint(logreg.3.edu))
 with(group2, table(Education, cluster3))
 with(group2(table(Education, cluster3), margin=1)*100)
 
+## Cluster 4 education
+
+logreg.4.edu<-glm(cluster4 ~ Education, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.edu)))
+summary(logreg.4.edu)
+exp(coef(summary(logreg.4.edu)))
+exp(confint(logreg.4.edu))
+with(group1, table(Education, cluster4))
+
+
+
 ## Cluster 1 Age
 
 logreg.1.age<-glm(cluster1 ~ Age, data=group2,
@@ -236,6 +247,7 @@ exp(coef(summary(logreg.1.age))[2, 1])
 exp(confint(logreg.1.age)[2, ])
 with(group2, table(Age, cluster1))
 with(group2(table(Age, cluster1), margin=1)*100)
+
 
 ## CLuster 2 AGe
 
@@ -258,6 +270,16 @@ exp(coef(summary(logreg.3.age))[2, 1])
 exp(confint(logreg.3.age)[2, ])
 with(group2, table(Age, cluster3))
 with(group2(table(Age, cluster3), margin=1)*100)
+
+##CLuster 4 Age
+
+logreg.4.age<-glm(cluster4 ~ Age, data=group1,
+                  family=binomial)
+exp(coef(summary(logreg.4.age)))
+summary(logreg.4.age)
+exp(coef(summary(logreg.4.age))[2, 1]) 
+exp(confint(logreg.4.age)[2, ])
+with(group1, table(Age, cluster4))
 
 ## MC cluster 1
 
@@ -488,7 +510,45 @@ with(group1, table(Unnatural, cluster4))
 with(group2, table(Disgusting, cluster1))
 with(group2, table(Disgusting, cluster2))
 with(group2, table(Disgusting, cluster3))
-with(group1, table(Disgusting, cluster4))
+
+
+cluster1.healthy <- glm(cluster1 ~ Healthy, data = group2,
+                    family = binomial)
+coef(summary(cluster1.healthy)) 
+exp(coef(summary(cluster1.healthy)))                          
+exp(confint(cluster1.healthy))
+summary(cluster1.healthy)
+with(group2, table(Healthy, cluster1))
+
+cluster1.h <- glm(cluster1 ~ relevel(Healthy,"3"), data = group2,
+                        family = binomial)
+coef(summary(cluster1.h)) 
+exp(coef(summary(cluster1.h)))                          
+
+cluster1.k <- glm(cluster1 ~ relevel(Kind,"4"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster1.k)) 
+exp(coef(summary(cluster1.k)))                          
+exp(confint(cluster1.k))
+summary(cluster1.k)   
+
+cluster1.un <- glm(cluster1 ~ relevel(Unnatural,"3"), data = group2,
+                  family = binomial)
+
+coef(summary(cluster1.un)) 
+exp(coef(summary(cluster1.un)))                          
+exp(confint(cluster1.un))
+summary(cluster1.un) 
+
+cluster1.dis <- glm(cluster1 ~ relevel(Disgusting,"3"), data = group2,
+                   family = binomial)
+
+coef(summary(cluster1.dis)) 
+exp(coef(summary(cluster1.dis)))                          
+exp(confint(cluster1.dis))
+summary(cluster1.dis) 
+
 
 ## Agree/Disagree cluster 2
 
@@ -499,6 +559,53 @@ exp(coef(summary(cluster2.adj)))
 exp(confint(cluster2.adj))
 summary(cluster2.adj)
 
+cluster2.healthy <- glm(cluster2 ~ Healthy, data = group2,
+                        family = binomial)
+coef(summary(cluster2.healthy)) 
+exp(coef(summary(cluster2.healthy)))                          
+exp(confint(cluster2.healthy))
+summary(cluster2.healthy)
+
+cluster2.eff <- glm(cluster2 ~ relevel(EF,"3"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster2.eff)) 
+exp(coef(summary(cluster2.eff)))
+exp(confint(cluster2.eff))
+summary(cluster2.eff)
+
+cluster2.t <- glm(cluster2 ~ relevel(Tasty,"3"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster2.t)) 
+exp(coef(summary(cluster2.t)))
+exp(confint(cluster2.t))
+summary(cluster2.t)
+
+cluster2.k <- glm(cluster2 ~ relevel(Kind,"4"), data = group2,
+                  family = binomial)
+
+coef(summary(cluster2.k)) 
+exp(coef(summary(cluster2.k)))                          
+exp(confint(cluster2.k))
+summary(cluster2.k)   
+
+cluster2.un <- glm(cluster2 ~ relevel(Unnatural,"3"), data = group2,
+                   family = binomial)
+
+coef(summary(cluster2.un)) 
+exp(coef(summary(cluster2.un)))                          
+exp(confint(cluster2.un))
+summary(cluster2.un) 
+
+cluster2.dis <- glm(cluster2 ~ relevel(Disgusting,"3"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster2.dis)) 
+exp(coef(summary(cluster2.dis)))                          
+exp(confint(cluster2.dis))
+summary(cluster2.dis) 
+
 ## Agree/Disagree cluster 3
 
 cluster3.adj <- glm(cluster3 ~ Healthy+EF+Tasty+Kind+Unnatural+Disgusting, data = group2,
@@ -507,6 +614,53 @@ coef(summary(cluster3.adj))
 exp(coef(summary(cluster3.adj)))                          
 exp(confint(cluster3.adj))
 summary(cluster3.adj)
+
+cluster3.healthy <- glm(cluster3 ~ Healthy, data = group2,
+                        family = binomial)
+coef(summary(cluster3.healthy)) 
+exp(coef(summary(cluster3.healthy)))                          
+exp(confint(cluster3.healthy))
+summary(cluster3.healthy)
+
+cluster3.eff <- glm(cluster3 ~ relevel(EF,"3"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster3.eff)) 
+exp(coef(summary(cluster3.eff)))
+exp(confint(cluster3.eff))
+summary(cluster3.eff)
+
+cluster3.t <- glm(cluster3 ~ relevel(Tasty,"3"), data = group2,
+                  family = binomial)
+
+coef(summary(cluster3.t)) 
+exp(coef(summary(cluster3.t)))
+exp(confint(cluster3.t))
+summary(cluster3.t)
+
+cluster3.k <- glm(cluster3 ~ relevel(Kind,"4"), data = group2,
+                  family = binomial)
+
+coef(summary(cluster3.k)) 
+exp(coef(summary(cluster3.k)))                          
+exp(confint(cluster3.k))
+summary(cluster3.k)   
+
+cluster3.un <- glm(cluster3 ~ relevel(Unnatural,"3"), data = group2,
+                   family = binomial)
+
+coef(summary(cluster3.un)) 
+exp(coef(summary(cluster3.un)))                          
+exp(confint(cluster3.un))
+summary(cluster3.un) 
+
+cluster3.dis <- glm(cluster3 ~ relevel(Disgusting,"3"), data = group2,
+                    family = binomial)
+
+coef(summary(cluster3.dis)) 
+exp(coef(summary(cluster3.dis)))                          
+exp(confint(cluster3.dis))
+summary(cluster3.dis) 
 
 ## Trying cluster 1
 group2[["Trying"]]<-as.factor(group2[["Trying"]])
@@ -647,3 +801,46 @@ exp(coef(summary(cluster4.ch)))
 exp(confint(cluster4.ch))
 summary(cluster4.ch)
 with(group1, table(Cheap, cluster4))
+
+## Samep price cluster 1
+
+group2[["Sameprice"]]<-as.factor(group2[["Sameprice"]])
+group1[["Sameprice"]]<-as.factor(group1[["Sameprice"]])
+
+cluster1.sp <- glm(cluster1 ~ relevel(Sameprice,"2"), data = group2,
+                   family = binomial)
+coef(summary(cluster1.sp)) 
+exp(coef(summary(cluster1.sp)))                          
+exp(confint(cluster1.sp))
+summary(cluster1.sp)
+with(group2, table(Sameprice, cluster1))
+
+## Sameprice price cluster 2
+
+cluster2.sp <- glm(cluster2 ~ relevel(Sameprice,"2"), data = group2,
+                   family = binomial)
+coef(summary(cluster2.sp)) 
+exp(coef(summary(cluster2.sp)))                          
+exp(confint(cluster2.sp))
+summary(cluster2.sp)
+with(group2, table(Sameprice, cluster2))
+
+## Sameprice cluster 3
+
+cluster3.sp <- glm(cluster3 ~ relevel(Sameprice,"2"), data = group2,
+                   family = binomial)
+coef(summary(cluster3.sp)) 
+exp(coef(summary(cluster3.sp)))                          
+exp(confint(cluster3.sp))
+summary(cluster3.sp)
+with(group2, table(Sameprice, cluster3))
+
+## Sameprice cluster 4
+
+cluster4.sp <- glm(cluster4 ~ Sameprice, data = group1,
+                   family = binomial)
+coef(summary(cluster4.sp)) 
+exp(coef(summary(cluster4.sp)))                          
+exp(confint(cluster4.sp))
+summary(cluster4.sp)
+with(group1, table(Sameprice, cluster4))
