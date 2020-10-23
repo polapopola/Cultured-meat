@@ -2,6 +2,7 @@
 new<-na.omit(DatasetCM_Age_cleaned)
 ## Dividing the data into two groups, group1 is non-meat eaters
 group1<- new[1:72, ]
+
 group1[["cluster1"]] <- NA  # added by Christian Ritz, Oct. 22 2020
 group1[["cluster2"]] <- NA
 group1[["cluster3"]] <- NA
@@ -44,6 +45,7 @@ group2[["cluster1"]] <- with(group2, ifelse(cluster == 1, 1, 0))
 group2[["cluster2"]] <- with(group2, ifelse(cluster == 2, 1, 0))
 ## CLuster 3, high 
 group2[["cluster3"]] <- with(group2, ifelse(cluster == 3, 1, 0))
+
 
 head(group2[, c("cluster", "cluster1", "cluster2", 
               "cluster3")])
@@ -247,6 +249,7 @@ exp(coef(summary(logreg.1.age))[2, 1])
 exp(confint(logreg.1.age)[2, ])
 with(group2, table(Age, cluster1))
 with(group2(table(Age, cluster1), margin=1)*100)
+clus3[["size"]]
 
 
 ## CLuster 2 AGe
@@ -259,6 +262,7 @@ exp(coef(summary(logreg.2.age))[2, 1])
 exp(confint(logreg.2.age)[2, ])
 with(group2, table(Age, cluster2))
 with(group2(table(Age, cluster2), margin=1)*100)
+
 
 ##CLuster 3 Age
 
@@ -512,7 +516,7 @@ with(group2, table(Disgusting, cluster2))
 with(group2, table(Disgusting, cluster3))
 
 
-cluster1.healthy <- glm(cluster1 ~ Healthy, data = group2,
+cluster1.healthy <- glm(cluster1 ~ relevel(Healthy,"3"), data = group2,
                     family = binomial)
 coef(summary(cluster1.healthy)) 
 exp(coef(summary(cluster1.healthy)))                          
@@ -814,6 +818,7 @@ exp(coef(summary(cluster1.sp)))
 exp(confint(cluster1.sp))
 summary(cluster1.sp)
 with(group2, table(Sameprice, cluster1))
+
 
 ## Sameprice price cluster 2
 
